@@ -5,6 +5,7 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { chains, provider } = configureChains(
@@ -17,18 +18,29 @@ function MyApp({ Component, pageProps }: AppProps) {
     chains,
   });
 
+  // create wagmi client
   const wagmiClient = createClient({
     autoConnect: true,
     connectors,
     provider,
   });
 
+  // create apollo client
+  const CYBERCONNECT_ENDPOINT: string = "https://api.cybertino.io/connect/";
+
+  const apolloClient = new ApolloClient({
+    uri: CYBERCONNECT_ENDPOINT,
+    cache: new InMemoryCache(),
+  });
+
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <Component {...pageProps} />
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <ApolloProvider client={apolloClient}>
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains}>
+          <Component {...pageProps} />
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </ApolloProvider>
   );
 }
 
