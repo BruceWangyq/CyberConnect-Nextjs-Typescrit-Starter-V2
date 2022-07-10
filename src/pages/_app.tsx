@@ -6,6 +6,7 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { Web3ContextProvider } from "../context/web3Context";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { chains, provider } = configureChains(
@@ -37,7 +38,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ApolloProvider client={apolloClient}>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
-          <Component {...pageProps} />
+          <Web3ContextProvider>
+            <Component {...pageProps} />
+          </Web3ContextProvider>
         </RainbowKitProvider>
       </WagmiConfig>
     </ApolloProvider>

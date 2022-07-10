@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@cyberlab/cyberconnect": "^4.5.0",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.7",
     "@rainbow-me/rainbowkit": "^0.4.2",
