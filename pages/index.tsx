@@ -1,10 +1,15 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
+
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const Home: NextPage = () => {
-  return <h1 className="text-xl font-bold underline">Hello world!</h1>;
+  return (
+    <div className="h-screen w-screen bg-gray-100 flex items-center justify-center">
+      <div className="flex justify-center">
+        <ConnectButton />
+      </div>
+    </div>
+  );
 };
 
 export default Home;
